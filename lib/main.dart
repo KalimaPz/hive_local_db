@@ -5,6 +5,9 @@ import 'package:hive_local_db/models/transaction.dart';
 import 'package:hive_local_db/pages/order_item_view.dart';
 import 'package:hive_local_db/pages/transaction_view.dart';
 
+import 'models/order_item.dart';
+import 'pages/setting.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
@@ -23,9 +26,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       routes: {
         TransactionView.routeName: (context) => TransactionView(),
         OrderItemsView.routeName: (context) => OrderItemsView(),
+        Setting.routeName: (context) => Setting(),
       },
       initialRoute: "/",
       home: TransactionView(),

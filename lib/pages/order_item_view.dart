@@ -96,28 +96,31 @@ class _OrderItemsViewState extends State<OrderItemsView> {
       appBar: AppBar(
         title: Text("Order Items List"),
       ),
-      body: ListView(
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        children: [
-          ElevatedButton(
-              onPressed: () async => addOrderItem(),
-              child: Text("Add Order Test")),
-          orderItems.length > 0
-              ? ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: orderItems.length,
-                  itemBuilder: (context, index) {
-                    return orderTile(
-                        dateTime: orderItems[index].orderDateTime,
-                        orderLines: orderItems[index].orderLines,
-                        order_type: orderItems[index].orderType,
-                        partner_id: orderItems[index].orderPartnerId,
-                        rider_id: orderItems[index].orderRiderId);
-                  },
-                )
-              : Container()
-        ],
+      body: SafeArea(
+        child: ListView(
+          primary: true,
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          children: [
+            orderItems.length > 0
+                ? ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: orderItems.length,
+                    itemBuilder: (context, index) {
+                      return orderTile(
+                          dateTime: orderItems[index].orderDateTime,
+                          orderLines: orderItems[index].orderLines,
+                          order_type: orderItems[index].orderType,
+                          partner_id: orderItems[index].orderPartnerId,
+                          rider_id: orderItems[index].orderRiderId);
+                    },
+                  )
+                : Container(),
+            ElevatedButton(
+                onPressed: () async => addOrderItem(),
+                child: Text("Add Order Test")),
+          ],
+        ),
       ),
     );
   }

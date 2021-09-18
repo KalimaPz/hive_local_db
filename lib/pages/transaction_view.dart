@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive_local_db/models/transaction.dart';
 import 'package:hive_local_db/pages/order_item_view.dart';
+import 'package:hive_local_db/pages/setting.dart';
 
 class TransactionView extends StatefulWidget {
   static String routeName = "/home/transaction";
@@ -54,7 +55,10 @@ class _TransactionViewState extends State<TransactionView> {
           IconButton(
               onPressed: () =>
                   Navigator.pushNamed(context, OrderItemsView.routeName),
-              icon: Icon(Icons.list))
+              icon: Icon(Icons.list)),
+          IconButton(
+              onPressed: () => Navigator.pushNamed(context, Setting.routeName),
+              icon: Icon(Icons.settings)),
         ],
         elevation: 0,
         backgroundColor: Colors.black87,
