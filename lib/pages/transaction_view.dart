@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive_local_db/models/transaction.dart';
+import 'package:hive_local_db/pages/order_item_view.dart';
 
 class TransactionView extends StatefulWidget {
+  static String routeName = "/home/transaction";
   TransactionView({Key? key}) : super(key: key);
 
   @override
@@ -48,6 +50,12 @@ class _TransactionViewState extends State<TransactionView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () =>
+                  Navigator.pushNamed(context, OrderItemsView.routeName),
+              icon: Icon(Icons.list))
+        ],
         elevation: 0,
         backgroundColor: Colors.black87,
         title: Text("HIVE"),

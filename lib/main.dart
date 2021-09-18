@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:hive_local_db/models/order_item.dart';
 import 'package:hive_local_db/models/transaction.dart';
+import 'package:hive_local_db/pages/order_item_view.dart';
 import 'package:hive_local_db/pages/transaction_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(TransactionAdapter());
+  Hive.registerAdapter(OrderItemAdapter());
+  Hive.registerAdapter(OrderLinesAdapter());
+
   await Hive.openBox<Transaction>("transactions");
+  await Hive.openBox<OrderItem>("order_items");
   runApp(MyApp());
 }
 
@@ -17,6 +23,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        TransactionView.routeName: (context) => TransactionView(),
+        OrderItemsView.routeName: (context) => OrderItemsView(),
+      },
+      initialRoute: "/",
       home: TransactionView(),
     );
   }
